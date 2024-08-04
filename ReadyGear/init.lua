@@ -11,20 +11,20 @@ core.commands = {
 
     ["help"] = function () -- lists available commands.
         print(" ");
-        core:Print("List of Slash Commands:")
-        core:Print("|cFF008080/rg config|r - shows config menu");
-        core:Print("|cFF008080/rg help|r - shows help info");
+        for i,v in ipairs(core.Text.CommandsList) do
+            core:Print(v);
+        end
         print(" ")
     end
 }
 
 local function HandleSlashCommands(str)	
-	if (#str == 0) then	
-		-- User just entered "/at" with no additional args.
-		core.commands.help();
-		return;		
-	end	
-	
+	if (#str == 0) then
+		-- User just entered "/rg" with no additional args.
+		core.Display:Toggle();
+		return;
+	end
+
 	local args = {};
 	for _, arg in ipairs({ string.split(' ', str) }) do
 		if (#arg > 0) then
@@ -56,7 +56,7 @@ local function HandleSlashCommands(str)
 end
 
 function core:Print(...)
-    local hex = select(4, self.Config.GetThemeColor());
+    local hex = core.Config.Defaults.colors.coral;
     local prefix = string.format("|cff%s%s:|r", hex:upper(), core.Text.AddonName);
     DEFAULT_CHAT_FRAME:AddMessage(string.join(" ", prefix, tostringall(...)))
 end

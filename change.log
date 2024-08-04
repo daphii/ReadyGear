@@ -4,3 +4,4 @@
 - Moved all text strings to a separate file.
 - Added unit gear scanning to Tools.
 - Added ItemLink parsing to Tools.
+- Windows are now movable.

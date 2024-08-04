@@ -10,6 +10,6 @@ text.lua
 tools.lua
 
 config.lua
-timer.lua
+display.lua
 
 init.lua

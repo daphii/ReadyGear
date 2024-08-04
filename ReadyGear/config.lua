@@ -10,12 +10,21 @@ local UIConfig;
 --------------------------------------
 -- Defaults (usually a database!)
 --------------------------------------
-local defaults = {
+Config.Defaults = {
 	theme = {
 		r = 0, 
 		g = 0.8, -- 204/255
 		b = 1,
-		hex = "00ccff"
+		hex = "F08080"
+	},
+
+	colors = {
+		white = "F2F2F2",
+		ivory = "F2ECD8",
+		coral = "F08080",
+		pink = "F2BBBB",
+		green = "BAD9D0",
+
 	}
 }
 
@@ -28,7 +37,7 @@ function Config:Toggle()
 end
 
 function Config:GetThemeColor()
-	local c = defaults.theme;
+	local c = Config.Defaults.theme;
 	return c.r, c.g, c.b, c.hex;
 end
 
@@ -119,6 +128,12 @@ function Config:CreateMenu()
 	UIConfig = CreateFrame("Frame", "ReadyGearConfig", UIParent, "UIPanelDialogTemplate");
 	UIConfig:SetSize(350, 400);
 	UIConfig:SetPoint("CENTER"); -- Doesn't need to be ("CENTER", UIParent, "CENTER")
+
+	UIConfig:SetMovable(true)
+    UIConfig:EnableMouse(true)
+    UIConfig:RegisterForDrag("LeftButton")
+    UIConfig:SetScript("OnDragStart", UIConfig.StartMoving)
+    UIConfig:SetScript("OnDragStop", UIConfig.StopMovingOrSizing)
 	
     UIConfig.Title:ClearAllPoints();
 	UIConfig.Title:SetFontObject("GameFontHighlight");

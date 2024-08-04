@@ -24,12 +24,7 @@ The addon will check and warn/tattle:\
 
 Text.Author = "Created by daphii in 2024."
 
-Text.ChangeLog = "0.1.0\
-- Started conversion from tutorial addon to planned addon.\
-- Added config, about, and changelog tabs to the config window.\
-- Moved all text strings to a separate file.\
-- Added unit gear scanning to Tools.\
-- Added ItemLink parsing to Tools."
+
 
 --------------------------------------
 --- Tables
@@ -54,3 +49,17 @@ Text.EquipmentSlotNames = {
     "MainHandSlot",
     "SecondaryHandSlot"
 }
+
+Text.CommandsList = {
+    "Available commands:",
+    "|cFFBAD9D0/rg|r - toggles the main window",
+    "|cFFBAD9D0/rg config|r - toggles the config window",
+    "|cFFBAD9D0/rg help|r - shows the help window"
+}
+
+Text.ChangeLog = "0.1.0\
+- Started conversion from tutorial addon to planned addon.\
+- Added config, about, and changelog tabs to the config window.\
+- Moved all text strings to a separate file.\
+- Added unit gear scanning to Tools.\
+- Added ItemLink parsing to Tools."
