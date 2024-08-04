@@ -68,6 +68,7 @@ end
 
 local function SetTabs(frame, numTabs, ...)
 	frame.numTabs = numTabs;
+	print("Num of args: ", #...)
 	
 	local contents = {};
 	local frameName = frame:GetName();
@@ -128,46 +129,46 @@ function Config:CreateMenu()
 	----------------------------------
 	-- Content1
 	----------------------------------
-	-- Save Button:
-	content1.saveBtn = self:CreateButton("CENTER", content1, "TOP", -70, "Save");
 
-	-- Reset Button:	
-	content1.resetBtn = self:CreateButton("TOP", content1.saveBtn, "BOTTOM", -10, "Reset");
-
-	-- Load Button:	
-	content1.loadBtn = self:CreateButton("TOP", content1.resetBtn, "BOTTOM", -10, "Load");
-
-	-- Slider 1:
-	content1.slider1 = CreateFrame("SLIDER", nil, content1, "OptionsSliderTemplate");
-	content1.slider1:SetPoint("TOP", content1.loadBtn, "BOTTOM", 0, -20);
-	content1.slider1:SetMinMaxValues(1, 100);
-	content1.slider1:SetValue(50);
-	content1.slider1:SetValueStep(30);
-	content1.slider1:SetObeyStepOnDrag(true);
-
-	-- Slider 2:
-	content1.slider2 = CreateFrame("SLIDER", nil, content1, "OptionsSliderTemplate");
-	content1.slider2:SetPoint("TOP", content1.slider1, "BOTTOM", 0, -20);
-	content1.slider2:SetMinMaxValues(1, 100);
-	content1.slider2:SetValue(40);
-	content1.slider2:SetValueStep(30);
-	content1.slider2:SetObeyStepOnDrag(true);
-
-	-- Check Button 1:
-	content1.checkBtn1 = CreateFrame("CheckButton", nil, content1, "UICheckButtonTemplate");
-	content1.checkBtn1:SetPoint("TOPLEFT", content1.slider1, "BOTTOMLEFT", -10, -40);
-	content1.checkBtn1.text:SetText("My Check Button!");
-
-	-- Check Button 2:
-	content1.checkBtn2 = CreateFrame("CheckButton", nil, content1, "UICheckButtonTemplate");
-	content1.checkBtn2:SetPoint("TOPLEFT", content1.checkBtn1, "BOTTOMLEFT", 0, -10);
-	content1.checkBtn2.text:SetText("Another Check Button!");
-	content1.checkBtn2:SetChecked(true);
-	
 	----------------------------------
 	-- Content2
 	----------------------------------
+		-- Save Button:
+		content2.saveBtn = self:CreateButton("CENTER", content2, "TOP", -70, "Save");
+
+		-- Reset Button:	
+		content2.resetBtn = self:CreateButton("TOP", content2.saveBtn, "BOTTOM", -10, "Reset");
 	
+		-- Load Button:	
+		content2.loadBtn = self:CreateButton("TOP", content2.resetBtn, "BOTTOM", -10, "Load");
+	
+		-- Slider 1:
+		content2.slider1 = CreateFrame("SLIDER", nil, content2, "OptionsSliderTemplate");
+		content2.slider1:SetPoint("TOP", content2.loadBtn, "BOTTOM", 0, -20);
+		content2.slider1:SetMinMaxValues(1, 100);
+		content2.slider1:SetValue(50);
+		content2.slider1:SetValueStep(30);
+		content2.slider1:SetObeyStepOnDrag(true);
+	
+		-- Slider 2:
+		content2.slider2 = CreateFrame("SLIDER", nil, content2, "OptionsSliderTemplate");
+		content2.slider2:SetPoint("TOP", content2.slider1, "BOTTOM", 0, -20);
+		content2.slider2:SetMinMaxValues(1, 100);
+		content2.slider2:SetValue(40);
+		content2.slider2:SetValueStep(30);
+		content2.slider2:SetObeyStepOnDrag(true);
+	
+		-- Check Button 1:
+		content2.checkBtn1 = CreateFrame("CheckButton", nil, content2, "UICheckButtonTemplate");
+		content2.checkBtn1:SetPoint("TOPLEFT", content2.slider1, "BOTTOMLEFT", -10, -40);
+		content2.checkBtn1.text:SetText("My Check Button!");
+	
+		-- Check Button 2:
+		content2.checkBtn2 = CreateFrame("CheckButton", nil, content2, "UICheckButtonTemplate");
+		content2.checkBtn2:SetPoint("TOPLEFT", content2.checkBtn1, "BOTTOMLEFT", 0, -10);
+		content2.checkBtn2.text:SetText("Another Check Button!");
+		content2.checkBtn2:SetChecked(true);
+
 	----------------------------------
 	-- Content3
 	----------------------------------

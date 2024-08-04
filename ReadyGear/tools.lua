@@ -6,6 +6,26 @@ core.Tools = {};
 
 local Tools = core.Tools;
 
+-- will set order for GetEquippedArmor return value
+local EquipmentSlotNames = {
+    "HeadSlot",
+    "Neckslot",
+    "ShoulderSlot",
+    "BackSlot",
+    "ChestSlot",
+    "WristSlot",
+    "HandsSlot",
+    "WaistSlot",
+    "LegsSlot",
+    "FeetSlot",
+    "Finger0Slot",
+    "Finger1Slot",
+    "Trinket0Slot",
+    "Trinket1Slot",
+    "MainHandSlot",
+    "SecondaryHandSlot"
+}
+
 -- Print info to chat when the addon is loaded.
 
 --print('Ready Gear 0.1 Loaded.');
@@ -17,6 +37,7 @@ function HyperLinkReader(itemLink)
     Suffix, Unique, LinkLvl, Name = string.find(itemLink,
     "|?c?f?f?(%x*)|?H?([^:]*):?(%d+):?(%d*):?(%d*):?(%d*):?(%d*):?(%d*):?(%-?%d*):?(%-?%d*):?(%d*):?(%d*):?(%-?%d*)|?h?%[?([^%[%]]*)%]?|?h?|?r?")
     local t = {
+        link = itemLink,
         color = Color,
         linkType = Ltype,
         id = Id,
@@ -33,22 +54,38 @@ function HyperLinkReader(itemLink)
     return t;
 end
 
-local function GetEquippedArmor(unit)
+-- Return a table which contains a label as a keys, and a subtable with all the link info as values.
+function Tools:GetEquippedArmor(unit)
+    local Armor = {};
     for i = 1, 19 do
         local itemLink = GetInventoryItemLink(unit, i);
         if itemLink then
-            print(itemLink);
             local infoTable = HyperLinkReader(itemLink);
-            for key, value in pairs(infoTable) do
-                if value ~= "" then
-                    print(key, value);
-                end
-            end
+            Armor[i] = infoTable;
+            print("Added infoTable to slot", i);
+        else
+            Armor[i] = nil;
+            print("Adding nil to slot", i);
         end
     end
+    return Armor;
 end
 
 -- GetEquippedArmor("player");
+
+local PlayerArmor = Tools:GetEquippedArmor("player");
+
+for i = 1, 19 do
+    print("EquipmentSlot:", i)
+    if (PlayerArmor[i] ~= nil) then
+        for subKey, SubValue in pairs(PlayerArmor[i]) do
+            print(subKey..": "..SubValue);
+        end
+    else
+        print("No Item Equipped.")
+    end
+    print("\n");
+end
 
 
 
