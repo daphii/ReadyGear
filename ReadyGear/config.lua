@@ -24,7 +24,6 @@ Config.Defaults = {
 		coral = "F08080",
 		pink = "F2BBBB",
 		green = "BAD9D0",
-
 	}
 }
 
@@ -100,11 +99,6 @@ local function SetTabs(frame, tabNames)
         tab.content = CreateFrame("Frame", nil, UIConfig.ScrollFrame);
         tab.content:SetSize(308, 500);
         tab.content:Hide();
-        
-        --[[ -- Add a random background color to the content frame for demonstration
-        tab.content.bg = tab.content:CreateTexture(nil, "BACKGROUND");
-        tab.content.bg:SetAllPoints(true);
-        tab.content.bg:SetColorTexture(math.random(), math.random(), math.random(), 0.6); ]]
         
         -- Insert the content frame into the contents table
         table.insert(contents, tab.content);

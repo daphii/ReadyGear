@@ -13,6 +13,8 @@ Text.AddonName = "ReadyGear";
 
 Text.WelcomeMessage = "Welcome back to ReadyGear, %s! Use /rg to get started!";
 
+Text.PersonalGearDisplayTitle = "%s's Gear";
+
 Text.ReadMe = "World of Warcraft addon which checks gear readiness for raid. Simple UI, with set filters. Current scope is your character's gear. Future scope is to include other players in your party and raid group.\
 \
 The addon will check and warn/tattle:\
@@ -24,30 +26,31 @@ The addon will check and warn/tattle:\
 
 Text.Author = "Created by daphii in 2024."
 
+Text.GearMissingWarning = "No %s item equipped!";
 
 
 --------------------------------------
 --- Tables
 --------------------------------------
 
--- will set order for GetEquippedArmor return value
-Text.EquipmentSlotNames = {
-    "HeadSlot",
-    "Neckslot",
-    "ShoulderSlot",
-    "BackSlot",
-    "ChestSlot",
-    "WristSlot",
-    "HandsSlot",
-    "WaistSlot",
-    "LegsSlot",
-    "FeetSlot",
-    "Finger0Slot",
-    "Finger1Slot",
-    "Trinket0Slot",
-    "Trinket1Slot",
-    "MainHandSlot",
-    "SecondaryHandSlot"
+Text.GearSlotNamesByID = {
+    "Head",
+    "Neck",
+    "Shoulder",
+    "Shirt",
+    "Chest",
+    "Belt",
+    "Legs",
+    "Feet",
+    "Wrist",
+    "Gloves",
+    "Finger 1",
+    "Finger 2",
+    "Trinket 1",
+    "Trinket 2",
+    "Cloak",
+    "Main Hand",
+    "Off Hand"
 }
 
 Text.CommandsList = {

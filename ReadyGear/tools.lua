@@ -62,10 +62,10 @@ function Tools:GetEquippedArmor(unit)
         if itemLink then
             local infoTable = HyperLinkReader(itemLink);
             Armor[i] = infoTable;
-            print("Added infoTable to slot", i);
+            --print("Added infoTable to slot", i);
         else
             Armor[i] = nil;
-            print("Adding nil to slot", i);
+            --print("Adding nil to slot", i);
         end
     end
     return Armor;
@@ -73,7 +73,7 @@ end
 
 -- GetEquippedArmor("player");
 
-local PlayerArmor = Tools:GetEquippedArmor("player");
+--[[ local PlayerArmor = Tools:GetEquippedArmor("player");
 
 for i = 1, 19 do
     print("EquipmentSlot:", i)
@@ -85,7 +85,7 @@ for i = 1, 19 do
         print("No Item Equipped.")
     end
     print("\n");
-end
+end ]]
 
 function Tools:DEBUG_FRAME_SIZE(frame)
     frame.bg = frame:CreateTexture(nil, "BACKGROUND")
