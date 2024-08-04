@@ -6,8 +6,10 @@
 ## DefaultState: enabled
 ## Notes: ReadyGear is a simple addon that displays your current gear's enchantments and gems, and your active consumables in a window.
 
+text.lua
+tools.lua
 
 config.lua
-tools.lua
 timer.lua
+
 init.lua

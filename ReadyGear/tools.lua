@@ -87,6 +87,12 @@ for i = 1, 19 do
     print("\n");
 end
 
+function Tools:DEBUG_FRAME_SIZE(frame)
+    frame.bg = frame:CreateTexture(nil, "BACKGROUND")
+    frame.bg:SetAllPoints(true)
+    frame.bg:SetColorTexture(0, 0, 0, 0.6)
+end
+
 
 
 

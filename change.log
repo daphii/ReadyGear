@@ -1,0 +1,6 @@
+0.1.0
+- Started conversion from tutorial addon to planned addon.
+- Added config, about, and changelog tabs to the config window.
+- Moved all text strings to a separate file.
+- Added unit gear scanning to Tools.
+- Added ItemLink parsing to Tools.
