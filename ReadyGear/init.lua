@@ -11,26 +11,20 @@ core.commands = {
 
     ["help"] = function () -- lists available commands.
         print(" ");
-        core:Print("List of Slash Commands:")
-        core:Print("|cFF008080/rg config|r - shows config menu");
-        core:Print("|cFF008080/rg help|r - shows help info");
-        print(" ")
-    end,
-
-    ["example"] = {
-        ["test"] = function (...)
-            core:Print("My Value:", tostringall(...));
+        for i,v in ipairs(core.Text.CommandsList) do
+            core:Print(v);
         end
-    }
+        print(" ")
+    end
 }
 
 local function HandleSlashCommands(str)	
-	if (#str == 0) then	
-		-- User just entered "/at" with no additional args.
-		core.commands.help();
-		return;		
-	end	
-	
+	if (#str == 0) then
+		-- User just entered "/rg" with no additional args.
+		core.Display:Toggle();
+		return;
+	end
+
 	local args = {};
 	for _, arg in ipairs({ string.split(' ', str) }) do
 		if (#arg > 0) then
@@ -62,14 +56,14 @@ local function HandleSlashCommands(str)
 end
 
 function core:Print(...)
-    local hex = select(4, self.Config.GetThemeColor());
-    local prefix = string.format("|cff%s%s|r", hex:upper(), "ReadyGear:");
+    local hex = core.Config.Defaults.colors.coral;
+    local prefix = string.format("|cff%s%s:|r", hex:upper(), core.Text.AddonName);
     DEFAULT_CHAT_FRAME:AddMessage(string.join(" ", prefix, tostringall(...)))
 end
 --------------------------------------------
 
 function core:init(event, name)
-    if (name ~= "ReadyGear") then return end
+    if (name ~= core.Text.AddonName) then return end
 
     -- to be able to use left and right arrows in the edit box
     for i = 1, NUM_CHAT_WINDOWS do
@@ -93,7 +87,7 @@ function core:init(event, name)
     SLASH_ReadyGear1 = "/rg"
     SlashCmdList.ReadyGear = HandleSlashCommands;
 
-    core:Print("Welcome back to ReadyGear,", UnitName("player").."!", "Use /rg to get started!");
+    core:Print(string.format(core.Text.WelcomeMessage, UnitName("player")) )
 
 end
 
