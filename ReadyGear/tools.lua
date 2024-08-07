@@ -26,6 +26,16 @@ local EquipmentSlotNames = {
     "SecondaryHandSlot"
 }
 
+-- slots that can be enchanted
+local enchantableSlots = {2,4,5,6,7,8,9,11,12,15,16}
+local gemSignatures = {
+    "+70 ",
+    "+75 ",
+    "+88 ",
+    "+127 ",
+    "Prismatic Socket"
+}
+
 -- Print info to chat when the addon is loaded.
 
 --print('Ready Gear 0.1 Loaded.');
@@ -69,6 +79,64 @@ function Tools:GetEquippedArmor(unit)
         end
     end
     return Armor;
+end
+
+function Tools:GetGearComment(itemLink, unit, slotID)
+    local enchantComment = ""
+    local gemComment = ""
+
+    if ItemIsEnchantable(slotID) then
+        local enchant = self:GetEnchantComment(itemLink);
+        if enchant then
+            enchantComment = enchant;
+        else
+            enchantComment = string.format("|cFF%sMissing Enchant!", core.Colors.Theme.pink);
+        end
+    else
+        enchantComment = string.format("|cFF%sNot Enchantable!", core.Colors.Theme.green);
+    end
+
+    local gem = self:GetGemComment(itemLink);
+    if gem == gemSignatures[5] then
+        gemComment = string.format("|cFF%sMissing Gem!", core.Colors.Theme.pink);
+    else
+        gemComment = gem;
+    end
+
+    return gemComment;
+end
+
+function Tools:GetGemComment(itemLink)
+    local data = C_TooltipInfo.GetHyperlink(itemLink);
+    for i = 1, #data.lines do
+        local leftText = data.lines[i].leftText
+        for _, signature in ipairs(gemSignatures) do
+            if string.find(leftText, signature) then
+                return leftText
+            end
+        end
+    end
+end
+
+function Tools:GetEnchantComment(itemLink)
+    local data = C_TooltipInfo.GetHyperlink(itemLink);
+    for i = 1, #data.lines do
+        local leftText = data.lines[i].leftText
+        local startPos, endPos = string.find(leftText, "Enchanted:")
+        if startPos then
+            local restOfLine = string.sub(leftText, endPos + 1)
+            return restOfLine
+        end
+    end
+end
+
+function ItemIsEnchantable(slotID)
+    for i = 1, #enchantableSlots do
+        if slotID == enchantableSlots[i] then
+            return true;
+        end
+    end
+    return false;
 end
 
 -- GetEquippedArmor("player");

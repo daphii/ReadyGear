@@ -27,19 +27,9 @@ function DEBUG_FRAME_SIZE(frame)
     frame.bg:SetColorTexture(0, 0, 0, 0.6)
 end
 
-function GetGearComment(item)
-    local comment = "No Comment."
-
-    if (item["enchant"] ~= "") then
-        comment = item["enchant"];
-    else
-        comment = "Not Enchanted!";
-    end
-
-    return comment;
-end
-
 local function DrawPersonalGearDisplay()
+
+    local unit = "player";
 
     ReadyGearDisplay.PersonalGearDisplay.title = ReadyGearDisplay.PersonalGearDisplay:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
     ReadyGearDisplay.PersonalGearDisplay.title:SetPoint("TOPLEFT", ReadyGearDisplay.TitleBg, "TOPLEFT", 20, -40);
@@ -47,23 +37,23 @@ local function DrawPersonalGearDisplay()
     ReadyGearDisplay.PersonalGearDisplay.title:SetFontObject("GameFontHighlight");
     ReadyGearDisplay.PersonalGearDisplay.title:SetTextColor(1, 1, 1, 1);
     
-    local armor = core.Tools:GetEquippedArmor("player");
+    local armor = core.Tools:GetEquippedArmor(unit);
     
     for i = 1, #gearOrder do
         local gearFrame = CreateFrame("Frame", "Slot"..gearOrder[i], ReadyGearDisplay.PersonalGearDisplay);
         gearFrame:SetSize(455, 20);
         gearFrame:SetPoint("TOPLEFT", 0, (-22 * (i - 1)) - 22);
-        DEBUG_FRAME_SIZE(gearFrame);
+        -- DEBUG_FRAME_SIZE(gearFrame);
 
         if (armor[gearOrder[i]] ~= nil) then
-            print("Armor Slot:", gearOrder[i], armor[gearOrder[i]].link);
+            -- print("Armor Slot:", gearOrder[i], armor[gearOrder[i]].link);
             gearFrame.link = gearFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
             gearFrame.link:SetPoint("LEFT", gearFrame, "LEFT", 3, 0);
             gearFrame.link:SetText(armor[gearOrder[i]].link);
 
             gearFrame.comment = gearFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
             gearFrame.comment:SetPoint("RIGHT", gearFrame, "RIGHT", -3, 0);
-            gearFrame.comment:SetText(GetGearComment(armor[gearOrder[i]]));
+            gearFrame.comment:SetText(core.Tools:GetGearComment(armor[gearOrder[i]].link, unit, gearOrder[i]));
         else
             gearFrame.link = gearFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
             gearFrame.link:SetPoint("LEFT", gearFrame, "LEFT", 3, 0);
@@ -75,13 +65,14 @@ local function DrawPersonalGearDisplay()
 
         ReadyGearDisplay.PersonalGearDisplay[gearOrder[i]] = gearFrame;
 
-        print("EquipmentSlot:", gearOrder[i])
-        if (armor[gearOrder[i]] ~= nil) then
-            for subKey, SubValue in pairs(armor[gearOrder[i]]) do
-                print(subKey..": "..SubValue);
-            end
-        end
-        print("\n");
+        -- print("EquipmentSlot:", gearOrder[i])
+        -- if (armor[gearOrder[i]] ~= nil) then
+        --     for subKey, SubValue in pairs(armor[gearOrder[i]]) do
+        --         print(subKey..": "..SubValue);
+        --     end
+        -- end
+        -- print("\n");
+        
     end
 
 end
