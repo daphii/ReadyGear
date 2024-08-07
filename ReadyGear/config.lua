@@ -151,7 +151,11 @@ function Config:CreateMenu()
 	-- Configuration
 	----------------------------------
 
-	-- Save Button:
+	configuration.comingSoon = configuration:CreateFontString(nil, "OVERLAY", "GameFontNormal");
+	configuration.comingSoon:SetPoint("TOP", configuration, "TOP", 0, -40);
+	configuration.comingSoon:SetText("Coming Soon!");
+
+	--[[ -- Save Button:
 	configuration.saveBtn = self:CreateButton("CENTER", configuration, "TOP", -70, "Save");
 
 	-- Reset Button:	
@@ -185,7 +189,7 @@ function Config:CreateMenu()
 	configuration.checkBtn2 = CreateFrame("CheckButton", nil, configuration, "UICheckButtonTemplate");
 	configuration.checkBtn2:SetPoint("TOPLEFT", configuration.checkBtn1, "BOTTOMLEFT", 0, -10);
 	configuration.checkBtn2.text:SetText("Another Check Button!");
-	configuration.checkBtn2:SetChecked(true);
+	configuration.checkBtn2:SetChecked(true); ]]
 
 	----------------------------------
 	-- About
@@ -232,7 +236,13 @@ function Config:CreateMenu()
 	changelog.text.text:SetJustifyH("LEFT")
 	changelog.text.text:SetText(core.Text.ChangeLog)
 	
+	UIConfig:SetFrameStrata("HIGH");
+
 	UIConfig:Hide();
+	
+
 	return UIConfig;
+
+	
 end
 

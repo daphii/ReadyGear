@@ -6,7 +6,7 @@ The addon will check and warn/tattle:
 
 - Enchants
 - Gems
-- Durablility
+- Durability
 - Missing gear
   
 Built off of the tutorial from Mayron @ https://www.youtube.com/@MayronDev

@@ -15,14 +15,15 @@ Text.WelcomeMessage = "Welcome back to ReadyGear, %s! Use /rg to get started!";
 
 Text.PersonalGearDisplayTitle = "%s's Gear";
 
-Text.ReadMe = "World of Warcraft addon which checks gear readiness for raid. Simple UI, with set filters. Current scope is your character's gear. Future scope is to include other players in your party and raid group.\
+Text.ReadMe = "World of Warcraft addon which checks gear readiness for raid. Simple UI, with set filters. Current scope is your character\'s gear. Future scope is to include other players in your party / raid group.\
 \
 The addon will check and warn/tattle:\
-\
 - Enchants\
 - Gems\
-- Durablility\
-- Missing gear";
+- Durability\
+- Missing gear\
+\
+Built off of the tutorial from Mayron @ https://www.youtube.com/@MayronDev";
 
 Text.Author = "Created by daphii in 2024."
 
@@ -65,4 +66,14 @@ Text.ChangeLog = "0.1.0\
 - Added config, about, and changelog tabs to the config window.\
 - Moved all text strings to a separate file.\
 - Added unit gear scanning to Tools.\
-- Added ItemLink parsing to Tools."
+- Added ItemLink parsing to Tools.\
+- Windows are now movable.\
+\
+0.1.1\
+- Removed the old tutorial code.\
+- Removed dummy config buttons.\
+- Added personal gear display, use /rg\
+- Personal gear display refreshes when you open the window.\
+- Added average item level to the personal gear display.\
+- Added summary messages to the personal gear display.\
+- fixed overlapping windows."

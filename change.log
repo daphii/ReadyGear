@@ -6,5 +6,11 @@
 - Added ItemLink parsing to Tools.
 - Windows are now movable.
 
-124cffa335ee\124Hitem:202558::::::::70:::::\124h[Calamity's Herald]\124h\124r");
-124cffa335ee\124Hitem:202558::::::::70::::1:9413:\124h[Calamity's Herald]\124h\124r");
+0.1.1
+- Removed the old tutorial code.
+- Removed dummy config buttons.
+- Added personal gear display, use /rg
+- Personal gear display refreshes when you open the window.
+- Added average item level to the personal gear display.
+- Added summary messages to the personal gear display.
+- fixed overlapping windows.
