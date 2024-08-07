@@ -27,7 +27,7 @@ local EquipmentSlotNames = {
 }
 
 -- slots that can be enchanted
-local enchantableSlots = {2,4,5,6,7,8,9,11,12,15,16}
+local enchantableSlots = {4,5,6,7,8,9,11,12,15,16}
 local gemSignatures = {
     "+70 ",
     "+75 ",
@@ -81,9 +81,10 @@ function Tools:GetEquippedArmor(unit)
     return Armor;
 end
 
-function Tools:GetGearComment(itemLink, unit, slotID)
+function Tools:GetGearComments(itemLink, unit, slotID)
     local enchantComment = ""
     local gemComment = ""
+    local ilvlComment = ""
 
     if ItemIsEnchantable(slotID) then
         local enchant = self:GetEnchantComment(itemLink);
@@ -93,17 +94,54 @@ function Tools:GetGearComment(itemLink, unit, slotID)
             enchantComment = string.format("|cFF%sMissing Enchant!", core.Colors.Theme.pink);
         end
     else
-        enchantComment = string.format("|cFF%sNot Enchantable!", core.Colors.Theme.green);
+        enchantComment = string.format("|cFF%sNot Enchantable.", core.Colors.Theme.green);
     end
 
     local gem = self:GetGemComment(itemLink);
     if gem == gemSignatures[5] then
         gemComment = string.format("|cFF%sMissing Gem!", core.Colors.Theme.pink);
+    elseif not gem then
+        gemComment = string.format("|cFF%sNo Gem Slot.", core.Colors.Theme.green);
     else
         gemComment = gem;
     end
 
-    return gemComment;
+    ilvlComment = self:GetIlvlComments(itemLink);
+
+    return enchantComment, gemComment, ilvlComment;
+end
+
+function Tools:GetAverageIlvl(unit)
+    local totalIlvl = 0;
+    local equippedArmor = self:GetEquippedArmor(unit);
+    for i = 1, 19 do
+        if equippedArmor[i] then
+            local data = C_TooltipInfo.GetHyperlink(equippedArmor[i].link);
+            for j = 1, #data.lines do
+                local leftText = data.lines[j].leftText
+                local startPos, endPos = string.find(leftText, "Item Level ")
+                if startPos then
+                    local restOfLine = string.sub(leftText, endPos + 1)
+                    if i == 16 then
+                        if equippedArmor[17] then
+                            totalIlvl = totalIlvl + tonumber(restOfLine);
+                        else
+                            totalIlvl = totalIlvl + (tonumber(restOfLine) * 2);
+                        end
+                    else
+                        totalIlvl = totalIlvl + tonumber(restOfLine);
+                    end
+                end
+            end
+        end
+    end
+--[[     local totalPieces = 15; -- no offhand
+    if equippedArmor[17] then
+        totalPieces = 16; -- including offhand
+    end ]]
+
+    return totalIlvl / 16;
+    
 end
 
 function Tools:GetGemComment(itemLink)
@@ -114,6 +152,18 @@ function Tools:GetGemComment(itemLink)
             if string.find(leftText, signature) then
                 return leftText
             end
+        end
+    end
+end
+
+function Tools:GetIlvlComments(itemLink)
+    local data = C_TooltipInfo.GetHyperlink(itemLink);
+    for i = 1, #data.lines do
+        local leftText = data.lines[i].leftText
+        local startPos, endPos = string.find(leftText, "Item Level ")
+        if startPos then
+            local restOfLine = string.sub(leftText, endPos + 1)
+            return restOfLine
         end
     end
 end
