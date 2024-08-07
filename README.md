@@ -1,4 +1,5 @@
 # ReadyGear
+[Curseforge](https://legacy.curseforge.com/wow/addons/ready-gear)
  
 World of Warcraft addon which checks gear readiness for raid. Simple UI, with set filters. Current scope is your character's gear. Future scope is to include other players in your party / raid group.
 
