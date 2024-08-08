@@ -91,7 +91,7 @@ function Tools:GetGearComments(itemLink, unit, slotID)
         if enchant then
             enchantComment = enchant;
         else
-            enchantComment = string.format("|cFF%sMissing Enchant!", core.Colors.Theme.pink);
+            enchantComment = string.format("|cFF%sMissing Enchant!", core.Colors.Theme.red);
         end
     else
         enchantComment = string.format("|cFF%sNot Enchantable.", core.Colors.Theme.green);
@@ -99,7 +99,7 @@ function Tools:GetGearComments(itemLink, unit, slotID)
 
     local gem = self:GetGemComment(itemLink);
     if gem == gemSignatures[5] then
-        gemComment = string.format("|cFF%sMissing Gem!", core.Colors.Theme.pink);
+        gemComment = string.format("|cFF%sMissing Gem!", core.Colors.Theme.red);
     elseif not gem then
         gemComment = string.format("|cFF%sNo Gem Slot.", core.Colors.Theme.green);
     else

@@ -108,13 +108,13 @@ function Display:GenerateAndFillPersonalGearData()
     end
 
     if enchantIssues then
-        ReadyGearDisplay.PersonalGearDisplay.enchantHeader:SetText(string.format("|cFF%sEnchant Issue!", core.Colors.Theme.pink));
+        ReadyGearDisplay.PersonalGearDisplay.enchantHeader:SetText(string.format("|cFF%sEnchant Issue!", core.Colors.Theme.red));
     else
         ReadyGearDisplay.PersonalGearDisplay.enchantHeader:SetText(string.format("|cFF%sEnchants Ready.", core.Colors.Theme.green));
     end
 
     if gemIssues then
-        ReadyGearDisplay.PersonalGearDisplay.gemHeader:SetText(string.format("|cFF%sGem Issue!", core.Colors.Theme.pink));
+        ReadyGearDisplay.PersonalGearDisplay.gemHeader:SetText(string.format("|cFF%sGem Issue!", core.Colors.Theme.red));
     else
         ReadyGearDisplay.PersonalGearDisplay.gemHeader:SetText(string.format("|cFF%sGems Ready.", core.Colors.Theme.green));
     end
