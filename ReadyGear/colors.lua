@@ -21,6 +21,17 @@ Colors.Theme = {
     pink = "FFC6FF",
 }
 
+Colors.FormatStrings = {
+    red = "|cFF"..Colors.Theme.red.."%s",
+    orange = "|cFF"..Colors.Theme.orange.."%s",
+    yellow = "|cFF"..Colors.Theme.yellow.."%s",
+    green = "|cFF"..Colors.Theme.green.."%s",
+    cyan = "|cFF"..Colors.Theme.cyan.."%s",
+    blue = "|cFF"..Colors.Theme.blue.."%s",
+    purple = "|cFF"..Colors.Theme.purple.."%s",
+    pink = "|cFF"..Colors.Theme.pink.."%s"
+}
+
 Colors.Armor = {
     broken = Colors.Theme.red,
     critical = Colors.Theme.yellow

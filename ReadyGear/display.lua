@@ -108,15 +108,15 @@ function Display:GenerateAndFillPersonalGearData()
     end
 
     if enchantIssues then
-        ReadyGearDisplay.PersonalGearDisplay.enchantHeader:SetText(string.format("|cFF%sEnchant Issue!", core.Colors.Theme.red));
+        ReadyGearDisplay.PersonalGearDisplay.enchantHeader:SetText(string.format(core.Colors.FormatStrings.red, "Enchant Issue!"));
     else
-        ReadyGearDisplay.PersonalGearDisplay.enchantHeader:SetText(string.format("|cFF%sEnchants Ready.", core.Colors.Theme.green));
+        ReadyGearDisplay.PersonalGearDisplay.enchantHeader:SetText(string.format(core.Colors.FormatStrings.green,  "Enchants Ready."));
     end
 
     if gemIssues then
-        ReadyGearDisplay.PersonalGearDisplay.gemHeader:SetText(string.format("|cFF%sGem Issue!", core.Colors.Theme.red));
+        ReadyGearDisplay.PersonalGearDisplay.gemHeader:SetText(string.format(core.Colors.FormatStrings.red, "Gem Issue!"));
     else
-        ReadyGearDisplay.PersonalGearDisplay.gemHeader:SetText(string.format("|cFF%sGems Ready.", core.Colors.Theme.green));
+        ReadyGearDisplay.PersonalGearDisplay.gemHeader:SetText(string.format(core.Colors.FormatStrings.green, "Gems Ready."));
     end
 
     ReadyGearDisplay.PersonalGearDisplay.ailvl:SetText(string.format("%d", math.floor(core.Tools:GetAverageIlvl(unit))));
