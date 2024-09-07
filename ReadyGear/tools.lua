@@ -27,12 +27,27 @@ local EquipmentSlotNames = {
 }
 
 -- slots that can be enchanted
-local enchantableSlots = {4,5,6,7,8,9,11,12,15,16}
+local enchantableSlots = {5,7,8,9,11,12,15,16}
+
+-- string signatures for gems
 local gemSignatures = {
-    "+70 ",
-    "+75 ",
-    "+88 ",
-    "+127 ",
+    -- Pure Stat
+    "+141 ",
+    "+159 ",
+    "+176 ",
+    -- Hybrid Stat
+    "+118 ",
+    "+132 ",
+    "+147 ",
+    -- Stamina
+    "+225 ",
+    "+250 ",
+    "+275 ",
+    -- Diamond
+    "+136 ",
+    "+159 ",
+    "+181 ",
+    -- Empty Socket
     "Prismatic Socket"
 }
 
