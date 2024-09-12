@@ -70,7 +70,8 @@ Text.CommandsList = {
     "|cFFBAD9D0/rg help|r - shows the help window"
 }
 
-Text.ChangeLog = "0.1.0\
+Text.ChangeLog = "\
+0.1.0\
 - Started conversion from tutorial addon to planned addon.\
 - Added config, about, and changelog tabs to the config window.\
 - Moved all text strings to a separate file.\
@@ -86,4 +87,9 @@ Text.ChangeLog = "0.1.0\
 - Added average item level to the personal gear display.\
 - Added summary messages to the personal gear display.\
 - fixed overlapping windows.\
+\
+0.1.2\
+- Frames now close with escape key.\
+- Added new colour scheme to the personal gear display.\
+- Added new stat colours.\
 "

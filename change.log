@@ -16,4 +16,8 @@
 - fixed overlapping windows.
 
 0.1.2
+*- Added leftover strings to text.lua
 - Frames now close with escape key.
+*- Automated changelog.
+- Added new colour scheme to the personal gear display.
+- Added new stat colours.
