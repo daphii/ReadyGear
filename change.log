@@ -14,3 +14,6 @@
 - Added average item level to the personal gear display.
 - Added summary messages to the personal gear display.
 - fixed overlapping windows.
+
+0.1.2
+- Frames now close with escape key.

@@ -29,6 +29,15 @@ Text.Author = "Created by daphii in 2024."
 
 Text.GearMissingWarning = "No %s item equipped!";
 
+Text.EnchantMissingMessage = "Missing Enchant!";
+Text.NotEnchantableMessage = "Not Enchantable.";
+Text.EnchantIssueMessage = "Enchant Issue!";
+Text.EnchantsReadyMessage = "Enchants Ready.";
+
+Text.GemMissingMessage = "Missing Gem!";
+Text.NoGemSlotMessage = "No Gem Slot.";
+Text.GemIssueMessage = "Gem Issue!";
+Text.GemsReadyMessage = "Gems Ready.";
 
 --------------------------------------
 --- Tables
@@ -76,4 +85,5 @@ Text.ChangeLog = "0.1.0\
 - Personal gear display refreshes when you open the window.\
 - Added average item level to the personal gear display.\
 - Added summary messages to the personal gear display.\
-- fixed overlapping windows."
+- fixed overlapping windows.\
+"

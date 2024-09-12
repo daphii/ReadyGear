@@ -120,6 +120,8 @@ end
 
 function Config:CreateMenu()
 	UIConfig = CreateFrame("Frame", "ReadyGearConfig", UIParent, "UIPanelDialogTemplate");
+	_G[UIConfig:GetName()] = UIConfig;
+	tinsert(UISpecialFrames, UIConfig:GetName());
 	UIConfig:SetSize(350, 400);
 	UIConfig:SetPoint("CENTER"); -- Doesn't need to be ("CENTER", UIParent, "CENTER")
 
