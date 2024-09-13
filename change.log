@@ -1,10 +1,12 @@
-0.1.0
-- Started conversion from tutorial addon to planned addon.
-- Added config, about, and changelog tabs to the config window.
-- Moved all text strings to a separate file.
-- Added unit gear scanning to Tools.
-- Added ItemLink parsing to Tools.
-- Windows are now movable.
+0.1.2
+*- Added leftover strings to text.lua
+- Frames now close with escape key.
+*- Automated changelog with add_change_log.py
+- Added new colour scheme to the personal gear display.
+- Added new stat colours.
+- Added support for socketable items via Nerubian Gemweaver.
+- Reworked gem display.
+- Changed \'Not Enchantable\' and \'No Gem Slot\' messages to gray.
 
 0.1.1
 - Removed the old tutorial code.
@@ -15,9 +17,10 @@
 - Added summary messages to the personal gear display.
 - fixed overlapping windows.
 
-0.1.2
-*- Added leftover strings to text.lua
-- Frames now close with escape key.
-*- Automated changelog.
-- Added new colour scheme to the personal gear display.
-- Added new stat colours.
+0.1.0
+- Started conversion from tutorial addon to planned addon.
+- Added config, about, and changelog tabs to the config window.
+- Moved all text strings to a separate file.
+- Added unit gear scanning to Tools.
+- Added ItemLink parsing to Tools.
+- Windows are now movable.

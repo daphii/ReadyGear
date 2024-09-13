@@ -20,7 +20,7 @@ def update_text_file():
             start_index = i
             break
     
-    if start_index is not None:
+    if start_index is not None:\
         # Keep lines up to and including 'Text.ChangeLog = "\'
         updated_lines = lines[:start_index + 1]
         # Append the formatted changelog lines, each followed by a newline character

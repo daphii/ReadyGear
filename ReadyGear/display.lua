@@ -130,11 +130,11 @@ function Display:CreateDisplay()
     ReadyGearDisplay:SetSize(frameWidth, frameHeight);
     ReadyGearDisplay:SetPoint("CENTER");
 
-    ReadyGearDisplay:SetMovable(true)
-    ReadyGearDisplay:EnableMouse(true)
-    ReadyGearDisplay:RegisterForDrag("LeftButton")
-    ReadyGearDisplay:SetScript("OnDragStart", ReadyGearDisplay.StartMoving)
-    ReadyGearDisplay:SetScript("OnDragStop", ReadyGearDisplay.StopMovingOrSizing)
+    ReadyGearDisplay:SetMovable(true);
+    ReadyGearDisplay:EnableMouse(true);
+    ReadyGearDisplay:RegisterForDrag("LeftButton");
+    ReadyGearDisplay:SetScript("OnDragStart", ReadyGearDisplay.StartMoving);
+    ReadyGearDisplay:SetScript("OnDragStop", ReadyGearDisplay.StopMovingOrSizing);
 
     ReadyGearDisplay.title = ReadyGearDisplay:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
     ReadyGearDisplay.title:SetPoint("CENTER", ReadyGearDisplay.TitleBg, "CENTER", 0, 0);

@@ -38,6 +38,7 @@ Text.GemMissingMessage = "Missing Gem!";
 Text.NoGemSlotMessage = "No Gem Slot.";
 Text.GemIssueMessage = "Gem Issue!";
 Text.GemsReadyMessage = "Gems Ready.";
+Text.AddGemMessage = "*Add Socket with Nerubian Gemweaver.";
 
 --------------------------------------
 --- Tables
@@ -71,13 +72,13 @@ Text.CommandsList = {
 }
 
 Text.ChangeLog = "\
-0.1.0\
-- Started conversion from tutorial addon to planned addon.\
-- Added config, about, and changelog tabs to the config window.\
-- Moved all text strings to a separate file.\
-- Added unit gear scanning to Tools.\
-- Added ItemLink parsing to Tools.\
-- Windows are now movable.\
+0.1.2\
+- Frames now close with escape key.\
+- Added new colour scheme to the personal gear display.\
+- Added new stat colours.\
+- Added support for socketable items via Nerubian Gemweaver.\
+- Reworked gem display.\
+- Changed \'Not Enchantable\' and \'No Gem Slot\' messages to gray.\
 \
 0.1.1\
 - Removed the old tutorial code.\
@@ -88,8 +89,11 @@ Text.ChangeLog = "\
 - Added summary messages to the personal gear display.\
 - fixed overlapping windows.\
 \
-0.1.2\
-- Frames now close with escape key.\
-- Added new colour scheme to the personal gear display.\
-- Added new stat colours.\
+0.1.0\
+- Started conversion from tutorial addon to planned addon.\
+- Added config, about, and changelog tabs to the config window.\
+- Moved all text strings to a separate file.\
+- Added unit gear scanning to Tools.\
+- Added ItemLink parsing to Tools.\
+- Windows are now movable.\
 "

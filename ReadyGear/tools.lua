@@ -29,6 +29,9 @@ local EquipmentSlotNames = {
 -- slots that can be enchanted
 local enchantableSlots = {5,7,8,9,11,12,15,16}
 
+-- slots that you can add a socket to
+local socketableSlots = {1,6,9}
+
 -- string signatures for gems
 local gemSignatures = {
     -- Pure Stat
@@ -39,6 +42,9 @@ local gemSignatures = {
     "+118 ",
     "+132 ",
     "+147 ",
+    "+175 ",
+    "+190 ",
+    "+205 ",
     -- Stamina
     "+225 ",
     "+250 ",
@@ -49,6 +55,27 @@ local gemSignatures = {
     "+181 ",
     -- Empty Socket
     "Prismatic Socket"
+}
+
+local statAbbreviations = {
+    ["Stamina"] = string.format(core.Colors.Stats.stamina, "STA"),
+    ["Strength"] = string.format(core.Colors.Stats.strength, "STR"),
+    ["Intellect"] = string.format(core.Colors.Stats.intellect, "INT"),
+    ["Agility"] = string.format(core.Colors.Stats.agility, "AGI"),
+    ["Versatility"] = string.format(core.Colors.Stats.versatility, "VRS"),
+    ["Haste"] = string.format(core.Colors.Stats.haste, "HST"),
+    ["Critical Strike"] = string.format(core.Colors.Stats.crit, "CRT"),
+    ["Mastery"] = string.format(core.Colors.Stats.mastery, "MST"),
+    ["Primary Stat"] = "PRM"
+}
+
+local gemAbbreviations = {
+    ["Critical Effect per unique Algari gem color"] = "CRTE",
+    ["Movement Speed per unique Algari gem color"] = "MVMT",
+    ["Maximum Mana per unique Algari gem color"] = "MANA",
+    ["opponent's failed interrupt attempts grant Precognition"] = "PRCG",
+    ["Damage Reduction when affected by Crowd Control"] = "CCDR",
+    ["getting snared increases damage of your next attack by 25578 per stack"] = "SNRD"
 }
 
 -- Print info to chat when the addon is loaded.
@@ -109,14 +136,18 @@ function Tools:GetGearComments(itemLink, unit, slotID)
             enchantComment = string.format(core.Colors.FormatStrings.red, core.Text.EnchantMissingMessage);
         end
     else
-        enchantComment = string.format(core.Colors.FormatStrings.green, core.Text.NotEnchantableMessage);
+        enchantComment = string.format(core.Colors.FormatStrings.gray, core.Text.NotEnchantableMessage);
     end
 
     local gem = self:GetGemComment(itemLink);
     if gem == gemSignatures[5] then
         gemComment = string.format(core.Colors.FormatStrings.red, core.Text.GemMissingMessage);
     elseif not gem then
-        gemComment = string.format(core.Colors.FormatStrings.green, core.Text.NoGemSlotMessage);
+        if ItemIsSocketable(slotID) then
+            gemComment = string.format(core.Colors.FormatStrings.gray, core.Text.AddGemMessage);
+        else
+            gemComment = string.format(core.Colors.FormatStrings.gray, core.Text.NoGemSlotMessage);
+        end
     else
         gemComment = gem;
     end
@@ -160,15 +191,66 @@ function Tools:GetAverageIlvl(unit)
 end
 
 function Tools:GetGemComment(itemLink)
+    local gems = {}
     local data = C_TooltipInfo.GetHyperlink(itemLink);
     for i = 1, #data.lines do
         local leftText = data.lines[i].leftText
         for _, signature in ipairs(gemSignatures) do
             if string.find(leftText, signature) then
-                return leftText
+                table.insert(gems, leftText)
             end
         end
     end
+
+    local gemComment = ""
+
+    if #gems > 0 then
+        for i = 1, #gems do
+            gemComment = gemComment..FormatGemForComment(gems[i]);
+        end
+    else
+        return nil;
+    end
+
+    return gemComment;
+end
+
+function FormatGemForComment(gem)
+    local formattedGemComment = gem
+
+
+
+    -- Iterate over statAbbreviations and replace matches
+    for key, value in pairs(statAbbreviations) do
+        formattedGemComment = string.gsub(formattedGemComment, key, value)
+    end
+    
+    -- Remove the "and"
+    formattedGemComment = string.gsub(formattedGemComment, "and ", "/")
+
+    -- Iterate over gemAbbreviations and replace matches
+    for key, value in pairs(gemAbbreviations) do
+        formattedGemComment = string.gsub(formattedGemComment, key, value)
+    end
+
+    -- Find the substring that starts with |A and ends with |a (Quality Icon)
+    local qualityIcon = string.match(formattedGemComment, "|A.-|a")
+
+    if qualityIcon then
+        -- Remove the qualityIcon from its original position
+        formattedGemComment = string.gsub(formattedGemComment, "|A.-|a", "")
+
+        -- Move the qualityIcon to the start of the string
+        formattedGemComment = qualityIcon .. formattedGemComment
+    end
+
+    -- Remove Numbers
+    formattedGemComment = string.gsub(formattedGemComment, "%+%S+", "")
+
+    --local printable = gsub(formattedGemComment, "\124", "\124\124");
+    --print(printable);
+
+    return formattedGemComment;
 end
 
 function Tools:GetIlvlComments(itemLink)
@@ -198,6 +280,15 @@ end
 function ItemIsEnchantable(slotID)
     for i = 1, #enchantableSlots do
         if slotID == enchantableSlots[i] then
+            return true;
+        end
+    end
+    return false;
+end
+
+function ItemIsSocketable(slotID)
+    for i = 1, #socketableSlots do
+        if slotID == socketableSlots[i] then
             return true;
         end
     end
