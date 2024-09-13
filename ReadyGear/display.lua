@@ -101,22 +101,22 @@ function Display:GenerateAndFillPersonalGearData()
 
             ReadyGearDisplay.PersonalGearDisplay[gearOrder[i]].gem:SetText(gem);
         else
-            ReadyGearDisplay.PersonalGearDisplay[gearOrder[i]].link:SetText("No "..core.Text.GearSlotNamesByID[gearOrder[i]].." Equipped!");
+            ReadyGearDisplay.PersonalGearDisplay[gearOrder[i]].link:SetText(string.format(core.Text.GearSlotNamesByID[gearOrder[i]], core.Text.GearMissingWarning));
             ReadyGearDisplay.PersonalGearDisplay[gearOrder[i]].link:SetTextColor(0.929, 0.373, 0.373, 1);
         end
 
     end
 
     if enchantIssues then
-        ReadyGearDisplay.PersonalGearDisplay.enchantHeader:SetText(string.format(core.Colors.FormatStrings.red, "Enchant Issue!"));
+        ReadyGearDisplay.PersonalGearDisplay.enchantHeader:SetText(string.format(core.Colors.FormatStrings.red, core.Text.EnchantIssueMessage));
     else
-        ReadyGearDisplay.PersonalGearDisplay.enchantHeader:SetText(string.format(core.Colors.FormatStrings.green,  "Enchants Ready."));
+        ReadyGearDisplay.PersonalGearDisplay.enchantHeader:SetText(string.format(core.Colors.FormatStrings.green,  core.Text.EnchantsReadyMessage));
     end
 
     if gemIssues then
-        ReadyGearDisplay.PersonalGearDisplay.gemHeader:SetText(string.format(core.Colors.FormatStrings.red, "Gem Issue!"));
+        ReadyGearDisplay.PersonalGearDisplay.gemHeader:SetText(string.format(core.Colors.FormatStrings.red, core.Text.GemIssueMessage));
     else
-        ReadyGearDisplay.PersonalGearDisplay.gemHeader:SetText(string.format(core.Colors.FormatStrings.green, "Gems Ready."));
+        ReadyGearDisplay.PersonalGearDisplay.gemHeader:SetText(string.format(core.Colors.FormatStrings.green, core.Text.GemsReadyMessage));
     end
 
     ReadyGearDisplay.PersonalGearDisplay.ailvl:SetText(string.format("%d", math.floor(core.Tools:GetAverageIlvl(unit))));
@@ -125,14 +125,16 @@ end
 
 function Display:CreateDisplay()
     ReadyGearDisplay = CreateFrame("Frame", "ReadyGearDisplay", UIParent, "BasicFrameTemplateWithInset");
+    _G[ReadyGearDisplay:GetName()] = ReadyGearDisplay;
+    tinsert(UISpecialFrames, ReadyGearDisplay:GetName());
     ReadyGearDisplay:SetSize(frameWidth, frameHeight);
     ReadyGearDisplay:SetPoint("CENTER");
 
-    ReadyGearDisplay:SetMovable(true)
-    ReadyGearDisplay:EnableMouse(true)
-    ReadyGearDisplay:RegisterForDrag("LeftButton")
-    ReadyGearDisplay:SetScript("OnDragStart", ReadyGearDisplay.StartMoving)
-    ReadyGearDisplay:SetScript("OnDragStop", ReadyGearDisplay.StopMovingOrSizing)
+    ReadyGearDisplay:SetMovable(true);
+    ReadyGearDisplay:EnableMouse(true);
+    ReadyGearDisplay:RegisterForDrag("LeftButton");
+    ReadyGearDisplay:SetScript("OnDragStart", ReadyGearDisplay.StartMoving);
+    ReadyGearDisplay:SetScript("OnDragStop", ReadyGearDisplay.StopMovingOrSizing);
 
     ReadyGearDisplay.title = ReadyGearDisplay:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
     ReadyGearDisplay.title:SetPoint("CENTER", ReadyGearDisplay.TitleBg, "CENTER", 0, 0);

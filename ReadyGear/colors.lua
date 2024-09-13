@@ -19,17 +19,19 @@ Colors.Theme = {
     blue = "A0C4FF",
     purple = "BDB2FF",
     pink = "FFC6FF",
+    gray = "71716F"
 }
 
 Colors.FormatStrings = {
-    red = "|cFF"..Colors.Theme.red.."%s",
-    orange = "|cFF"..Colors.Theme.orange.."%s",
-    yellow = "|cFF"..Colors.Theme.yellow.."%s",
-    green = "|cFF"..Colors.Theme.green.."%s",
-    cyan = "|cFF"..Colors.Theme.cyan.."%s",
-    blue = "|cFF"..Colors.Theme.blue.."%s",
-    purple = "|cFF"..Colors.Theme.purple.."%s",
-    pink = "|cFF"..Colors.Theme.pink.."%s"
+    red = "|cFF"..Colors.Theme.red.."%s|r",
+    orange = "|cFF"..Colors.Theme.orange.."%s|r",
+    yellow = "|cFF"..Colors.Theme.yellow.."%s|r",
+    green = "|cFF"..Colors.Theme.green.."%s|r",
+    cyan = "|cFF"..Colors.Theme.cyan.."%s|r",
+    blue = "|cFF"..Colors.Theme.blue.."%s|r",
+    purple = "|cFF"..Colors.Theme.purple.."%s|r",
+    pink = "|cFF"..Colors.Theme.pink.."%s|r",
+    gray = "|cFF"..Colors.Theme.gray.."%s|r"
 }
 
 Colors.Armor = {
@@ -38,12 +40,12 @@ Colors.Armor = {
 }
 
 Colors.Stats = {
-    stamina = Colors.Theme.purple,
-    strength = Colors.Theme.red,
-    intellect = Colors.Theme.cyan,
-    agility = Colors.Theme.yellow,
-    versatility = Colors.Theme.pink,
-    haste = Colors.Theme.orange,
-    crit = Colors.Theme.green,
-    mastery = Colors.Theme.blue
+    stamina = Colors.FormatStrings.purple,
+    strength = Colors.FormatStrings.red,
+    intellect = Colors.FormatStrings.cyan,
+    agility = Colors.FormatStrings.yellow,
+    versatility = Colors.FormatStrings.pink,
+    haste = Colors.FormatStrings.orange,
+    crit = Colors.FormatStrings.green,
+    mastery = Colors.FormatStrings.blue
 }

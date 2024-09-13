@@ -120,6 +120,8 @@ end
 
 function Config:CreateMenu()
 	UIConfig = CreateFrame("Frame", "ReadyGearConfig", UIParent, "UIPanelDialogTemplate");
+	_G[UIConfig:GetName()] = UIConfig;
+	tinsert(UISpecialFrames, UIConfig:GetName());
 	UIConfig:SetSize(350, 400);
 	UIConfig:SetPoint("CENTER"); -- Doesn't need to be ("CENTER", UIParent, "CENTER")
 
@@ -144,7 +146,7 @@ function Config:CreateMenu()
     UIConfig.ScrollFrame.ScrollBar:SetPoint("TOPLEFT", UIConfig.ScrollFrame, "TOPRIGHT", -12, -18);
     UIConfig.ScrollFrame.ScrollBar:SetPoint("BOTTOMRIGHT", UIConfig.ScrollFrame, "BOTTOMRIGHT", -7, 18);
 	
-	local configuration, about, changelog = SetTabs(UIConfig, {"Configuration", "About", "Changelog"});
+	local configuration, about, changelog = SetTabs(UIConfig, {"Configuration", "About", "Change Log"});
 	
 	
 	----------------------------------
@@ -231,7 +233,7 @@ function Config:CreateMenu()
 	-- DEBUG_FRAME_SIZE(changelog.text);
 
 	changelog.text.text = changelog.text:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-	changelog.text.text:SetPoint("TOPLEFT", 10, -10)
+	changelog.text.text:SetPoint("TOPLEFT", 10, 0)
 	changelog.text.text:SetWidth(280)
 	changelog.text.text:SetJustifyH("LEFT")
 	changelog.text.text:SetText(core.Text.ChangeLog)
