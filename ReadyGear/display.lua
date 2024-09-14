@@ -30,6 +30,15 @@ function Display:Toggle()
     end
 end
 
+function Open()
+    print("Group Joined, Opening Display");
+    local display = ReadyGearDisplay or Display:CreateDisplay();
+    if not display:IsShown() then
+        Display:GenerateAndFillPersonalGearData();
+        display:Show();
+    end
+end
+
 function DEBUG_FRAME_SIZE(frame)
     frame.bg = frame:CreateTexture(nil, "BACKGROUND")
     frame.bg:SetAllPoints(true)
@@ -125,8 +134,13 @@ end
 
 function Display:CreateDisplay()
     ReadyGearDisplay = CreateFrame("Frame", "ReadyGearDisplay", UIParent, "BasicFrameTemplateWithInset");
+    
     _G[ReadyGearDisplay:GetName()] = ReadyGearDisplay;
     tinsert(UISpecialFrames, ReadyGearDisplay:GetName());
+
+    ReadyGearDisplay:RegisterEvent("GROUP_JOINED");
+    ReadyGearDisplay:SetScript("OnEvent", Open);
+
     ReadyGearDisplay:SetSize(frameWidth, frameHeight);
     ReadyGearDisplay:SetPoint("CENTER");
 
@@ -158,4 +172,4 @@ function Display:CreateDisplay()
     return ReadyGearDisplay;
 end
 
-
+ReadyGearDisplay = Display:CreateDisplay();
