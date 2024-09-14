@@ -7,6 +7,7 @@
 - Added support for socketable items via Nerubian Gemweaver.
 - Reworked gem display.
 - Changed \'Not Enchantable\' and \'No Gem Slot\' messages to gray.
+- Fixed Bug causing gems to be marked ready when missing a gem!
 
 0.1.1
 - Removed the old tutorial code.

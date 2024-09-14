@@ -34,6 +34,8 @@ local socketableSlots = {1,6,9}
 
 -- string signatures for gems
 local gemSignatures = {
+    -- Empty Socket
+    "Prismatic Socket",
     -- Pure Stat
     "+141 ",
     "+159 ",
@@ -53,8 +55,6 @@ local gemSignatures = {
     "+136 ",
     "+159 ",
     "+181 ",
-    -- Empty Socket
-    "Prismatic Socket"
 }
 
 local statAbbreviations = {
@@ -140,7 +140,7 @@ function Tools:GetGearComments(itemLink, unit, slotID)
     end
 
     local gem = self:GetGemComment(itemLink);
-    if gem == gemSignatures[5] then
+    if gem == gemSignatures[1] then
         gemComment = string.format(core.Colors.FormatStrings.red, core.Text.GemMissingMessage);
     elseif not gem then
         if ItemIsSocketable(slotID) then
