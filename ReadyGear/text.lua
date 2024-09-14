@@ -72,6 +72,9 @@ Text.CommandsList = {
 }
 
 Text.ChangeLog = "\
+0.1.3\
+- Display will now open when joining a group.\
+\
 0.1.2\
 - Frames now close with escape key.\
 - Added new colour scheme to the personal gear display.\
