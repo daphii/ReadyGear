@@ -64,6 +64,14 @@ Text.GearSlotNamesByID = {
     "Off Hand"
 }
 
+Text.QualityIcons = {
+    [1] = "|A:Professions-ChatIcon-Quality-Tier1:20:20:0:0|a",
+    [2] = "|A:Professions-ChatIcon-Quality-Tier2:20:20:0:0|a",
+    [3] = "|A:Professions-ChatIcon-Quality-Tier3:20:20:0:0|a",
+    [4] = "|A:Professions-ChatIcon-Quality-Tier4:20:20:0:0|a",
+    [5] = "|A:Professions-ChatIcon-Quality-Tier5:20:20:0:0|a"
+}
+
 Text.CommandsList = {
     "Available commands:",
     "|cFFBAD9D0/rg|r - toggles the main window",
@@ -74,6 +82,8 @@ Text.CommandsList = {
 Text.ChangeLog = "\
 0.1.3\
 - Display will now open when joining a group.\
+- Average item level will now update when changing gear.\
+- Display window will update when changing gear, enchanting or socketing.\
 \
 0.1.2\
 - Frames now close with escape key.\

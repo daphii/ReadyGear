@@ -235,6 +235,7 @@ function FormatGemForComment(gem)
 
     -- Find the substring that starts with |A and ends with |a (Quality Icon)
     local qualityIcon = string.match(formattedGemComment, "|A.-|a")
+    --print(string.gsub(qualityIcon, "|", "||"))
 
     if qualityIcon then
         -- Remove the qualityIcon from its original position

@@ -21,19 +21,10 @@ local gearOrder = { 1,2,3,15,5,9,10,6,7,8,11,12,13,14,16,17 }
 --- Display Functions
 --------------------------------------
 function Display:Toggle()
-    local display = ReadyGearDisplay or Display:CreateDisplay();
+    local display = ReadyGearDisplay;
     if display:IsShown() then
         display:Hide();
     else
-        Display:GenerateAndFillPersonalGearData();
-        display:Show();
-    end
-end
-
-function Open()
-    print("Group Joined, Opening Display");
-    local display = ReadyGearDisplay or Display:CreateDisplay();
-    if not display:IsShown() then
         Display:GenerateAndFillPersonalGearData();
         display:Show();
     end
@@ -138,8 +129,31 @@ function Display:CreateDisplay()
     _G[ReadyGearDisplay:GetName()] = ReadyGearDisplay;
     tinsert(UISpecialFrames, ReadyGearDisplay:GetName());
 
-    ReadyGearDisplay:RegisterEvent("GROUP_JOINED");
-    ReadyGearDisplay:SetScript("OnEvent", Open);
+    ReadyGearDisplay.events = CreateFrame("Frame");
+    local events = ReadyGearDisplay.events;
+
+    function events:GROUP_JOINED(...)
+        if not ReadyGearDisplay:IsShown() then
+            Display:GenerateAndFillPersonalGearData();
+            ReadyGearDisplay:Show();
+        end
+    end
+
+    function events:COMBAT_RATING_UPDATE(...)
+        if ReadyGearDisplay:IsShown() then
+            Display:GenerateAndFillPersonalGearData();
+        end
+    end
+
+    ReadyGearDisplay:SetScript("OnEvent", function(self, event, ...)
+        events[event](self, ...); -- call one of the functions above
+    end);
+
+    for k, _ in pairs(events) do
+        if k ~= 0 then
+            ReadyGearDisplay:RegisterEvent(k); -- Register all events for which handlers have been defined
+        end
+    end
 
     ReadyGearDisplay:SetSize(frameWidth, frameHeight);
     ReadyGearDisplay:SetPoint("CENTER");
