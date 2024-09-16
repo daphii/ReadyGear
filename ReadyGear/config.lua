@@ -133,11 +133,14 @@ function Config:CreateMenu()
 	
     UIConfig.Title:ClearAllPoints();
 	UIConfig.Title:SetFontObject("GameFontHighlight");
+---@diagnostic disable-next-line: undefined-global
 	UIConfig.Title:SetPoint("LEFT", ReadyGearConfigTitleBG, "LEFT", 6, 1);
 	UIConfig.Title:SetText("Ready Gear Config");
 	
 	UIConfig.ScrollFrame = CreateFrame("ScrollFrame", nil, UIConfig, "UIPanelScrollFrameTemplate");
+---@diagnostic disable-next-line: undefined-global
 	UIConfig.ScrollFrame:SetPoint("TOPLEFT", ReadyGearConfigDialogBG, "TOPLEFT", 4, -8);
+---@diagnostic disable-next-line: undefined-global
 	UIConfig.ScrollFrame:SetPoint("BOTTOMRIGHT", ReadyGearConfigDialogBG, "BOTTOMRIGHT", -3, 4);
 	UIConfig.ScrollFrame:SetClipsChildren(true);
 	UIConfig.ScrollFrame:SetScript("OnMouseWheel", ScrollFrame_OnMouseWheel);

@@ -58,15 +58,15 @@ local gemSignatures = {
 }
 
 local statAbbreviations = {
-    ["Stamina"] = string.format(core.Colors.Stats.stamina, "STA"),
-    ["Strength"] = string.format(core.Colors.Stats.strength, "STR"),
-    ["Intellect"] = string.format(core.Colors.Stats.intellect, "INT"),
-    ["Agility"] = string.format(core.Colors.Stats.agility, "AGI"),
-    ["Versatility"] = string.format(core.Colors.Stats.versatility, "VRS"),
-    ["Haste"] = string.format(core.Colors.Stats.haste, "HST"),
-    ["Critical Strike"] = string.format(core.Colors.Stats.crit, "CRT"),
-    ["Mastery"] = string.format(core.Colors.Stats.mastery, "MST"),
-    ["Primary Stat"] = "PRM"
+    ["Stamina"] = string.format(core.Colors:GetStatColor("stamina"), "STA"),
+    ["Strength"] = string.format(core.Colors:GetStatColor("strength"), "STR"),
+    ["Intellect"] = string.format(core.Colors:GetStatColor("intellect"), "INT"),
+    ["Agility"] = string.format(core.Colors:GetStatColor("agility"), "AGI"),
+    ["Versatility"] = string.format(core.Colors:GetStatColor("versatility"), "VRS"),
+    ["Haste"] = string.format(core.Colors:GetStatColor("haste"), "HST"),
+    ["Critical Strike"] = string.format(core.Colors:GetStatColor("crit"), "CRT"),
+    ["Mastery"] = string.format(core.Colors:GetStatColor("mastery"), "MST"),
+    ["Primary Stat"] = string.format(core.Colors:GetStatColor("primary"), "PRM")
 }
 
 local gemAbbreviations = {
@@ -133,20 +133,20 @@ function Tools:GetGearComments(itemLink, unit, slotID)
         if enchant then
             enchantComment = enchant;
         else
-            enchantComment = string.format(core.Colors.FormatStrings.red, core.Text.EnchantMissingMessage);
+            enchantComment = string.format(core.Colors:GetMessageColor("error"), core.Text.EnchantMissingMessage);
         end
     else
-        enchantComment = string.format(core.Colors.FormatStrings.gray, core.Text.NotEnchantableMessage);
+        enchantComment = string.format(core.Colors:GetMessageColor("text"), core.Text.NotEnchantableMessage);
     end
 
     local gem = self:GetGemComment(itemLink);
     if gem == gemSignatures[1] then
-        gemComment = string.format(core.Colors.FormatStrings.red, core.Text.GemMissingMessage);
+        gemComment = string.format(core.Colors:GetMessageColor("error"), core.Text.GemMissingMessage);
     elseif not gem then
         if ItemIsSocketable(slotID) then
-            gemComment = string.format(core.Colors.FormatStrings.gray, core.Text.AddGemMessage);
+            gemComment = string.format(core.Colors:GetMessageColor("text"), core.Text.AddGemMessage);
         else
-            gemComment = string.format(core.Colors.FormatStrings.gray, core.Text.NoGemSlotMessage);
+            gemComment = string.format(core.Colors:GetMessageColor("text"), core.Text.NoGemSlotMessage);
         end
     else
         gemComment = gem;

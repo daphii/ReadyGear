@@ -108,15 +108,15 @@ function Display:GenerateAndFillPersonalGearData()
     end
 
     if enchantIssues then
-        ReadyGearDisplay.PersonalGearDisplay.enchantHeader:SetText(string.format(core.Colors.FormatStrings.red, core.Text.EnchantIssueMessage));
+        ReadyGearDisplay.PersonalGearDisplay.enchantHeader:SetText(string.format(core.Colors:GetMessageColor("error"), core.Text.EnchantIssueMessage));
     else
-        ReadyGearDisplay.PersonalGearDisplay.enchantHeader:SetText(string.format(core.Colors.FormatStrings.green,  core.Text.EnchantsReadyMessage));
+        ReadyGearDisplay.PersonalGearDisplay.enchantHeader:SetText(string.format(core.Colors:GetMessageColor("success"),  core.Text.EnchantsReadyMessage));
     end
 
     if gemIssues then
-        ReadyGearDisplay.PersonalGearDisplay.gemHeader:SetText(string.format(core.Colors.FormatStrings.red, core.Text.GemIssueMessage));
+        ReadyGearDisplay.PersonalGearDisplay.gemHeader:SetText(string.format(core.Colors:GetMessageColor("error"), core.Text.GemIssueMessage));
     else
-        ReadyGearDisplay.PersonalGearDisplay.gemHeader:SetText(string.format(core.Colors.FormatStrings.green, core.Text.GemsReadyMessage));
+        ReadyGearDisplay.PersonalGearDisplay.gemHeader:SetText(string.format(core.Colors:GetMessageColor("success"), core.Text.GemsReadyMessage));
     end
 
     ReadyGearDisplay.PersonalGearDisplay.ailvl:SetText(string.format("%d", math.floor(core.Tools:GetAverageIlvl(unit))));

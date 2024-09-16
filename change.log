@@ -2,6 +2,7 @@
 - Display will now open when joining a group.
 - Average item level will now update when changing gear.
 - Display window will update when changing gear, enchanting or socketing.
+*- Reworked colour string retrieval.
 
 0.1.2
 *- Added leftover strings to text.lua
