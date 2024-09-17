@@ -54,12 +54,6 @@ local function HandleSlashCommands(str)
 		end
 	end
 end
-
-function core:Print(...)
-    local hex = core.Config.Defaults.colors.coral;
-    local prefix = string.format("|cff%s%s:|r", hex:upper(), core.Text.AddonName);
-    DEFAULT_CHAT_FRAME:AddMessage(string.join(" ", prefix, tostringall(...)))
-end
 --------------------------------------------
 
 function core:init(event, name)

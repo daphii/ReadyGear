@@ -64,6 +64,15 @@ Text.GearSlotNamesByID = {
     "Off Hand"
 }
 
+Text.QualityIcons = {
+    Explorer = "   ",
+    Adventurer = "|A:Professions-ChatIcon-Quality-Tier1:20:20:0:0|a",
+    Veteran = "|A:Professions-ChatIcon-Quality-Tier2:20:20:0:0|a",
+    Champion = "|A:Professions-ChatIcon-Quality-Tier3:20:20:0:0|a",
+    Hero = "|A:Professions-ChatIcon-Quality-Tier4:20:20:0:0|a",
+    Myth = "|A:Professions-ChatIcon-Quality-Tier5:20:20:0:0|a"
+}
+
 Text.CommandsList = {
     "Available commands:",
     "|cFFBAD9D0/rg|r - toggles the main window",
@@ -74,6 +83,11 @@ Text.CommandsList = {
 Text.ChangeLog = "\
 0.1.3\
 - Display will now open when joining a group.\
+- Average item level will now update when changing gear.\
+- Display window will update when changing gear, enchanting or socketing.\
+- Added Durability display.\
+- Added Upgrade display, using crafting quality icons to indicate tracks.\
+- Added slot name display for easier reference.\
 \
 0.1.2\
 - Frames now close with escape key.\

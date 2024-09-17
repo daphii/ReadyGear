@@ -10,7 +10,8 @@ local Colors = core.Colors;
 --- Colors
 --------------------------------------
 
-Colors.Theme = {
+Theme = {
+    -- Display Window
     red = "FFADAD",
     orange = "FFD6A5",
     yellow = "FDFFB6",
@@ -19,33 +20,51 @@ Colors.Theme = {
     blue = "A0C4FF",
     purple = "BDB2FF",
     pink = "FFC6FF",
-    gray = "71716F"
+    gray = "71716F",
+
+    -- Chat Box
+	ivory = "F2ECD8",
+	coral = "F08080"
 }
 
-Colors.FormatStrings = {
-    red = "|cFF"..Colors.Theme.red.."%s|r",
-    orange = "|cFF"..Colors.Theme.orange.."%s|r",
-    yellow = "|cFF"..Colors.Theme.yellow.."%s|r",
-    green = "|cFF"..Colors.Theme.green.."%s|r",
-    cyan = "|cFF"..Colors.Theme.cyan.."%s|r",
-    blue = "|cFF"..Colors.Theme.blue.."%s|r",
-    purple = "|cFF"..Colors.Theme.purple.."%s|r",
-    pink = "|cFF"..Colors.Theme.pink.."%s|r",
-    gray = "|cFF"..Colors.Theme.gray.."%s|r"
+Messages = {
+    highlight = Theme.ivory,
+    text = Theme.gray,
+    error = Theme.red,
+    warning = Theme.yellow,
+    success = Theme.green,
 }
 
-Colors.Armor = {
-    broken = Colors.Theme.red,
-    critical = Colors.Theme.yellow
+Stats = {
+    stamina = Theme.purple,
+    strength = Theme.red,
+    intellect = Theme.cyan,
+    agility = Theme.yellow,
+    versatility = Theme.pink,
+    haste = Theme.orange,
+    crit = Theme.green,
+    mastery = Theme.blue,
+    primary = Theme.ivory
 }
 
-Colors.Stats = {
-    stamina = Colors.FormatStrings.purple,
-    strength = Colors.FormatStrings.red,
-    intellect = Colors.FormatStrings.cyan,
-    agility = Colors.FormatStrings.yellow,
-    versatility = Colors.FormatStrings.pink,
-    haste = Colors.FormatStrings.orange,
-    crit = Colors.FormatStrings.green,
-    mastery = Colors.FormatStrings.blue
+Armor = {
+    ok = Theme.gray,
+    critical = Theme.yellow,
+    broken = Theme.red
 }
+
+function Colors:GetThemeColor(name)
+    return "|cFF"..Theme[name].."%s|r";
+end
+
+function Colors:GetStatColor(name)
+    return "|cFF"..Stats[name].."%s|r";
+end
+
+function Colors:GetArmorColor(name)
+    return "|cFF"..Armor[name].."%s|r";
+end
+
+function Colors:GetMessageColor(name)
+    return "|cFF"..Messages[name].."%s|r";
+end
