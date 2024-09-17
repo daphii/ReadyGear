@@ -106,6 +106,17 @@ function HyperLinkReader(itemLink)
     return t;
 end
 
+function core:Print(...)
+    local prefix = string.format(core.Colors:GetThemeColor("coral"), core.Text.AddonName..":");
+    DEFAULT_CHAT_FRAME:AddMessage(string.join(" ", prefix, tostringall(...)))
+end
+
+function Tools:DEBUG_FRAME_SIZE(frame)
+    frame.bg = frame:CreateTexture(nil, "BACKGROUND")
+    frame.bg:SetAllPoints(true)
+    frame.bg:SetColorTexture(0, 0, 0, 0.6)
+end
+
 -- Return a table which contains a label as a keys, and a subtable with all the link info as values.
 function Tools:GetEquippedArmor(unit)
     local Armor = {};
@@ -124,12 +135,14 @@ function Tools:GetEquippedArmor(unit)
 end
 
 function Tools:GetGearComments(itemLink, unit, slotID)
-    local enchantComment = ""
-    local gemComment = ""
-    local ilvlComment = ""
+    local enchantComment = "";
+    local gemComment = "";
+    local ilvlComment = "";
+    local upgradeTrack = "";
+    local durabilityComment = "";
 
     if ItemIsEnchantable(slotID) then
-        local enchant = self:GetEnchantComment(itemLink);
+        local enchant = self:GetEnchantComment(unit, slotID);
         if enchant then
             enchantComment = enchant;
         else
@@ -139,7 +152,7 @@ function Tools:GetGearComments(itemLink, unit, slotID)
         enchantComment = string.format(core.Colors:GetMessageColor("text"), core.Text.NotEnchantableMessage);
     end
 
-    local gem = self:GetGemComment(itemLink);
+    local gem = self:GetGemComment(unit, slotID);
     if gem == gemSignatures[1] then
         gemComment = string.format(core.Colors:GetMessageColor("error"), core.Text.GemMissingMessage);
     elseif not gem then
@@ -152,9 +165,77 @@ function Tools:GetGearComments(itemLink, unit, slotID)
         gemComment = gem;
     end
 
-    ilvlComment = self:GetIlvlComments(itemLink);
+    ilvlComment = self:GetIlvlComments(unit, slotID);
 
-    return enchantComment, gemComment, ilvlComment;
+    upgradeTrack = Tools:GetUpgradeTrackIcon(unit, slotID);
+    durabilityComment = Tools:GetDurabilityComment(unit, slotID); -- use slotID to get durability
+
+    return enchantComment, gemComment, ilvlComment, upgradeTrack, durabilityComment;
+end
+
+
+function Tools:GetGemComment(unit, slotID)
+    local data = C_TooltipInfo.GetInventoryItem(unit, slotID)
+    local gems = {}
+    for i = 1, #data.lines do
+        local leftText = data.lines[i].leftText
+        for _, signature in ipairs(gemSignatures) do
+            if string.find(leftText, signature) then
+                table.insert(gems, leftText)
+            end
+        end
+    end
+    
+    local gemComment = ""
+    
+    if #gems > 0 then
+        for i = 1, #gems do
+            gemComment = gemComment..FormatGemForComment(gems[i]);
+        end
+    else
+        return nil;
+    end
+    
+    return gemComment;
+end
+
+function FormatGemForComment(gem)
+    local formattedGemComment = gem
+    
+    
+    
+    -- Iterate over statAbbreviations and replace matches
+    for key, value in pairs(statAbbreviations) do
+        formattedGemComment = string.gsub(formattedGemComment, key, value)
+    end
+    
+    -- Remove the "and"
+    formattedGemComment = string.gsub(formattedGemComment, "and ", "/")
+    
+    -- Iterate over gemAbbreviations and replace matches
+    for key, value in pairs(gemAbbreviations) do
+        formattedGemComment = string.gsub(formattedGemComment, key, value)
+    end
+    
+    -- Find the substring that starts with |A and ends with |a (Quality Icon)
+    local qualityIcon = string.match(formattedGemComment, "|A.-|a")
+    --print(string.gsub(qualityIcon, "|", "||"))
+    
+    if qualityIcon then
+        -- Remove the qualityIcon from its original position
+        formattedGemComment = string.gsub(formattedGemComment, "|A.-|a", "")
+        
+        -- Move the qualityIcon to the start of the string
+        formattedGemComment = qualityIcon .. formattedGemComment
+    end
+    
+    -- Remove Numbers
+    formattedGemComment = string.gsub(formattedGemComment, "%+%S+", "")
+    
+    --local printable = gsub(formattedGemComment, "\124", "\124\124");
+    --print(printable);
+    
+    return formattedGemComment;
 end
 
 function Tools:GetAverageIlvl(unit)
@@ -190,72 +271,8 @@ function Tools:GetAverageIlvl(unit)
     
 end
 
-function Tools:GetGemComment(itemLink)
-    local gems = {}
-    local data = C_TooltipInfo.GetHyperlink(itemLink);
-    for i = 1, #data.lines do
-        local leftText = data.lines[i].leftText
-        for _, signature in ipairs(gemSignatures) do
-            if string.find(leftText, signature) then
-                table.insert(gems, leftText)
-            end
-        end
-    end
-
-    local gemComment = ""
-
-    if #gems > 0 then
-        for i = 1, #gems do
-            gemComment = gemComment..FormatGemForComment(gems[i]);
-        end
-    else
-        return nil;
-    end
-
-    return gemComment;
-end
-
-function FormatGemForComment(gem)
-    local formattedGemComment = gem
-
-
-
-    -- Iterate over statAbbreviations and replace matches
-    for key, value in pairs(statAbbreviations) do
-        formattedGemComment = string.gsub(formattedGemComment, key, value)
-    end
-    
-    -- Remove the "and"
-    formattedGemComment = string.gsub(formattedGemComment, "and ", "/")
-
-    -- Iterate over gemAbbreviations and replace matches
-    for key, value in pairs(gemAbbreviations) do
-        formattedGemComment = string.gsub(formattedGemComment, key, value)
-    end
-
-    -- Find the substring that starts with |A and ends with |a (Quality Icon)
-    local qualityIcon = string.match(formattedGemComment, "|A.-|a")
-    --print(string.gsub(qualityIcon, "|", "||"))
-
-    if qualityIcon then
-        -- Remove the qualityIcon from its original position
-        formattedGemComment = string.gsub(formattedGemComment, "|A.-|a", "")
-
-        -- Move the qualityIcon to the start of the string
-        formattedGemComment = qualityIcon .. formattedGemComment
-    end
-
-    -- Remove Numbers
-    formattedGemComment = string.gsub(formattedGemComment, "%+%S+", "")
-
-    --local printable = gsub(formattedGemComment, "\124", "\124\124");
-    --print(printable);
-
-    return formattedGemComment;
-end
-
-function Tools:GetIlvlComments(itemLink)
-    local data = C_TooltipInfo.GetHyperlink(itemLink);
+function Tools:GetIlvlComments(unit, slotID)
+    local data = C_TooltipInfo.GetInventoryItem(unit, slotID)
     for i = 1, #data.lines do
         local leftText = data.lines[i].leftText
         local startPos, endPos = string.find(leftText, "Item Level ")
@@ -266,8 +283,8 @@ function Tools:GetIlvlComments(itemLink)
     end
 end
 
-function Tools:GetEnchantComment(itemLink)
-    local data = C_TooltipInfo.GetHyperlink(itemLink);
+function Tools:GetEnchantComment(unit, slotID)
+    local data = C_TooltipInfo.GetInventoryItem(unit, slotID)
     for i = 1, #data.lines do
         local leftText = data.lines[i].leftText
         local startPos, endPos = string.find(leftText, "Enchanted:")
@@ -276,6 +293,68 @@ function Tools:GetEnchantComment(itemLink)
             return restOfLine
         end
     end
+end
+
+function Tools:GetUpgradeTrackIcon(unit, slotID)
+    local data = C_TooltipInfo.GetInventoryItem(unit, slotID)
+    if not data or not data.lines then
+        return ""
+    end
+
+    for i = 1, #data.lines do
+        local leftText = data.lines[i].leftText
+        if leftText then
+            local startPos, endPos = string.find(leftText, "Upgrade Level: ")
+            if startPos and endPos then
+                local upgradeLevel = string.sub(leftText, endPos + 1)
+                for key, value in pairs(core.Text.QualityIcons) do
+                    upgradeLevel = string.gsub(upgradeLevel, key, value)
+                end
+                --core.Print(upgradeLevel)
+                return upgradeLevel
+            end
+        end
+    end
+    --core.Print("No Upgrade Track Icon")
+    return ""
+end
+
+function Tools:GetDurabilityComment(unit, slotID)
+    local data = C_TooltipInfo.GetInventoryItem(unit, slotID)
+    if not data or not data.lines then
+        core:Print("No tooltip data found for unit: " .. tostring(unit) .. ", slotID: " .. tostring(slotID))
+        return ""
+    end
+
+    local durability = "    "
+    for i = 1, #data.lines do
+        local leftText = data.lines[i].leftText
+        if leftText then
+            local startPos, endPos = string.find(leftText, "Durability ")
+            if startPos then
+                local restOfLine = string.sub(leftText, endPos + 1)
+                local currentDurability, maxDurability = string.match(restOfLine, "(%d+) / (%d+)")
+                if currentDurability and maxDurability then
+                    currentDurability = tonumber(currentDurability)
+                    maxDurability = tonumber(maxDurability)
+                    local durabilityPercentage = math.floor((currentDurability / maxDurability) * 100)
+
+                    if durabilityPercentage == 0 then
+                        durability = string.format(core.Colors:GetArmorColor("broken"), durabilityPercentage .. "%")
+                    elseif durabilityPercentage < 20 then
+                        durability = string.format(core.Colors:GetArmorColor("critical"), durabilityPercentage .. "%")
+                    else
+                        durability = string.format(core.Colors:GetArmorColor("ok"), durabilityPercentage .. "%")
+                    end
+                else
+                    core:Print("Failed to parse durability values from: " .. restOfLine)
+                end
+            end
+        end
+    end
+
+    --core:Print(durability)
+    return durability
 end
 
 function ItemIsEnchantable(slotID)
@@ -312,9 +391,4 @@ for i = 1, 19 do
     print("\n");
 end ]]
 
-function Tools:DEBUG_FRAME_SIZE(frame)
-    frame.bg = frame:CreateTexture(nil, "BACKGROUND")
-    frame.bg:SetAllPoints(true)
-    frame.bg:SetColorTexture(0, 0, 0, 0.6)
-end
 

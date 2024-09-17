@@ -217,7 +217,7 @@ function Config:CreateMenu()
 	about.author:SetSize(280, 50)
 	about.author:SetPoint("TOPLEFT", about.readme, "BOTTOMLEFT", 0, -10)
 
-	-- DEBUG_FRAME_SIZE(about.author);
+	--DEBUG_FRAME_SIZE(about.author);
 
 	about.author.text = about.author:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 	about.author.text:SetPoint("TOPLEFT", 10, -10)
@@ -233,7 +233,7 @@ function Config:CreateMenu()
 	changelog.text:SetSize(280, 200)
 	changelog.text:SetPoint("TOPLEFT", 10, -10)
 
-	-- DEBUG_FRAME_SIZE(changelog.text);
+	--DEBUG_FRAME_SIZE(changelog.text);
 
 	changelog.text.text = changelog.text:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 	changelog.text.text:SetPoint("TOPLEFT", 10, 0)

@@ -54,11 +54,6 @@ local function HandleSlashCommands(str)
 		end
 	end
 end
-
-function core:Print(...)
-    local prefix = string.format(core.Colors:GetThemeColor("coral"), core.Text.AddonName);
-    DEFAULT_CHAT_FRAME:AddMessage(string.join(" ", prefix, tostringall(...)))
-end
 --------------------------------------------
 
 function core:init(event, name)
