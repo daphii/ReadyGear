@@ -110,7 +110,7 @@ function Display:GenerateAndFillPersonalGearData()
 
             ReadyGearDisplay.PersonalGearDisplay[gearOrder[i]].link:SetText(armor[gearOrder[i]].link);
 
-            ReadyGearDisplay.PersonalGearDisplay[gearOrder[i]].slotName:SetText(string.format(core.Colors:GetMessageColor("text"), core.Text.GearSlotNamesByID[i]));
+            ReadyGearDisplay.PersonalGearDisplay[gearOrder[i]].slotName:SetText(string.format(core.Colors:GetMessageColor("text"), core.Text.GearSlotNamesByID[gearOrder[i]]));
 
             ReadyGearDisplay.PersonalGearDisplay[gearOrder[i]].enchant:SetText(enchant);
 
