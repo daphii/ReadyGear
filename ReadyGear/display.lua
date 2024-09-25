@@ -12,7 +12,7 @@ local ReadyGearDisplay;
 --------------------------------------
 
 local frameHeight = 430;
-local frameWidth = 948;
+local frameWidth = 980;
 
 local gearOrder = { 1,2,3,15,5,9,10,6,7,8,11,12,13,14,16,17 }
 
@@ -140,6 +140,7 @@ end
 
 function Display:CreateDisplay()
     ReadyGearDisplay = CreateFrame("Frame", "ReadyGearDisplay", UIParent, "BasicFrameTemplateWithInset");
+    ReadyGearDisplay:SetFrameStrata("DIALOG");
     
     _G[ReadyGearDisplay:GetName()] = ReadyGearDisplay;
     tinsert(UISpecialFrames, ReadyGearDisplay:GetName());

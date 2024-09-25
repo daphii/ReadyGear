@@ -38,7 +38,8 @@ Text.GemMissingMessage = "Missing Gem!";
 Text.NoGemSlotMessage = "No Gem Slot.";
 Text.GemIssueMessage = "Gem Issue!";
 Text.GemsReadyMessage = "Gems Ready.";
-Text.AddGemMessage = "*Add Socket with Nerubian Gemweaver.";
+Text.AddNerGemMessage = "*Add Socket with Nerubian Gemweaver.";
+Text.AddMagGemMessage = "*Add Socket with Magnificent Jeweler's Setting.";
 
 --------------------------------------
 --- Tables
@@ -81,6 +82,9 @@ Text.CommandsList = {
 }
 
 Text.ChangeLog = "\
+0.1.3\
+- Added support for Magnificent Jeweler's Setting.\
+\
 0.1.3\
 - Display will now open when joining a group.\
 - Average item level will now update when changing gear.\
