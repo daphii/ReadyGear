@@ -29,8 +29,11 @@ local EquipmentSlotNames = {
 -- slots that can be enchanted
 local enchantableSlots = {5,7,8,9,11,12,15,16}
 
--- slots that you can add a socket to
+-- slots that you can add a socket to with Nerubian Gemweaver.
 local socketableSlots = {1,6,9}
+
+-- slots that you can add a socket to with Magnificent Jeweler's Setting
+local magnificentSocketableSlots = {2,11,12}
 
 -- string signatures for gems
 local gemSignatures = {
@@ -157,10 +160,13 @@ function Tools:GetGearComments(itemLink, unit, slotID)
         gemComment = string.format(core.Colors:GetMessageColor("error"), core.Text.GemMissingMessage);
     elseif not gem then
         if ItemIsSocketable(slotID) then
-            gemComment = string.format(core.Colors:GetMessageColor("text"), core.Text.AddGemMessage);
+            gemComment = string.format(core.Colors:GetMessageColor("text"), core.Text.AddNerGemMessage);
+        elseif ItemIsMagnificentSocketable(slotID) then
+            gemComment = string.format(core.Colors:GetMessageColor("text"), core.Text.AddMagGemMessage);
         else
             gemComment = string.format(core.Colors:GetMessageColor("text"), core.Text.NoGemSlotMessage);
         end
+        
     else
         gemComment = gem;
     end
@@ -369,6 +375,15 @@ end
 function ItemIsSocketable(slotID)
     for i = 1, #socketableSlots do
         if slotID == socketableSlots[i] then
+            return true;
+        end
+    end
+    return false;
+end
+
+function ItemIsMagnificentSocketable(slotID)
+    for i = 1, #magnificentSocketableSlots do
+        if slotID == magnificentSocketableSlots[i] then
             return true;
         end
     end

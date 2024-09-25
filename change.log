@@ -1,4 +1,7 @@
 0.1.3
+- Added support for Magnificent Jeweler's Setting.
+
+0.1.3
 - Display will now open when joining a group.
 - Average item level will now update when changing gear.
 - Display window will update when changing gear, enchanting or socketing.
