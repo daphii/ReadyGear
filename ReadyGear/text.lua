@@ -38,7 +38,7 @@ Text.GemMissingMessage = "Missing Gem!";
 Text.NoGemSlotMessage = "No Gem Slot.";
 Text.GemIssueMessage = "Gem Issue!";
 Text.GemsReadyMessage = "Gems Ready.";
-Text.AddNerGemMessage = "*Add Socket with Nerubian Gemweaver.";
+Text.AddNerGemMessage = "*Add Socket with S.A.D.";
 Text.AddMagGemMessage = "*Add Socket with Magnificent Jeweler's Setting.";
 
 --------------------------------------
